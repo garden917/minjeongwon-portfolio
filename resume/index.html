@@ -1,319 +1,325 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!doctype html>
+<html lang="ko">
 <head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>민정원 Resume</title>
-  <style>
-    /* Default styles provided by pandoc.
-    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
-    */
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
-  </style>
-  <link rel="stylesheet" href="../assets/resume.css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>민정원 · Resume</title>
+<meta name="description" content="민정원 Product Owner / Product Manager / TPM 이력서.">
+<style>
+:root {
+  --bg: #f7f9fc;
+  --panel: #fff;
+  --ink: #111827;
+  --muted: #566174;
+  --faint: #8a94a6;
+  --line: #dce3ee;
+  --blue: #1f6feb;
+  --green: #16794c;
+}
+:root[data-theme="dark"] {
+  --bg: #0d1117;
+  --panel: #151b23;
+  --ink: #eef4ff;
+  --muted: #a7b2c3;
+  --faint: #748096;
+  --line: #2a3443;
+  --blue: #6aa6ff;
+  --green: #50d18d;
+}
+* { box-sizing: border-box; }
+html { width: 100%; overflow-x: hidden; }
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", sans-serif;
+  line-height: 1.62;
+}
+main, section, article, div, p, h1, h2, h3, dd { min-width: 0; }
+a { color: inherit; text-decoration: none; }
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--bg) 90%, transparent);
+  backdrop-filter: blur(16px);
+}
+.topbar-inner {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.brand { font-weight: 850; }
+.actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.actions a, .actions button {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 11px;
+  background: var(--panel);
+  color: var(--muted);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.actions .print { background: var(--blue); border-color: var(--blue); color: #fff; font-weight: 800; }
+.sheet {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 42px 20px 88px;
+}
+.resume-head > *, .grid > * { min-width: 0; }
+.resume-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 32px;
+  padding-bottom: 28px;
+  border-bottom: 3px solid var(--ink);
+}
+h1 { margin: 0 0 8px; font-size: clamp(42px, 6vw, 64px); line-height: 1; letter-spacing: -.045em; }
+.role { color: var(--muted); font-size: 18px; font-weight: 650; }
+.contact {
+  align-self: end;
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 38px;
+  margin-top: 34px;
+}
+section { margin-bottom: 34px; }
+h2 {
+  margin: 0 0 13px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+  color: var(--blue);
+  font-size: 12px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+h3 { margin: 0 0 5px; font-size: 16px; }
+p { margin: 0 0 10px; color: var(--muted); }
+p, li, dd, .role, .contact { overflow-wrap: anywhere; }
+.strength {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+.strength:last-child { border-bottom: 0; }
+.strength p { font-size: 14px; }
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 14px;
+}
+.impact {
+  padding: 9px 0;
+  border-bottom: 1px dashed var(--line);
+  color: var(--muted);
+  font-size: 13.5px;
+}
+.impact b { color: var(--ink); }
+.job {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+}
+.job:first-of-type { padding-top: 0; }
+.job:last-child { border-bottom: 0; }
+.job-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+.company { font-size: 18px; font-weight: 850; }
+.period { color: var(--faint); font-size: 13px; }
+.position { margin: 2px 0 12px; color: var(--muted); font-size: 14px; }
+.subhead { margin: 14px 0 6px; color: var(--blue); font-size: 13px; font-weight: 850; }
+ul { margin: 0; padding-left: 1.1rem; color: var(--muted); }
+li { margin: 4px 0; font-size: 13.5px; }
+.side-card {
+  margin-bottom: 18px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--panel);
+}
+.side-card h2 { border-bottom: 0; padding-bottom: 0; margin-bottom: 10px; }
+.side-card dl { margin: 0; }
+.side-card dt { margin-top: 12px; color: var(--faint); font-size: 11px; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; }
+.side-card dt:first-child { margin-top: 0; }
+.side-card dd { margin: 3px 0 0; color: var(--muted); font-size: 13px; }
+.style-list { list-style: none; padding: 0; }
+.style-list li { padding: 7px 0; border-bottom: 1px dashed var(--line); }
+.style-list li:last-child { border-bottom: 0; }
+footer { color: var(--faint); text-align: center; font-size: 12px; padding-top: 28px; border-top: 1px solid var(--line); }
+@media (max-width: 860px) {
+  .resume-head, .grid { grid-template-columns: 1fr; }
+  .contact { align-self: start; }
+  .impact-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 520px) {
+  body { width: 100%; max-width: 100vw; }
+  .topbar-inner { align-items: flex-start; flex-direction: column; max-width: 390px; margin-left: 0; margin-right: 0; }
+  .actions { width: 100%; max-width: 100%; flex-wrap: wrap; overflow-x: hidden; padding-bottom: 2px; }
+  .actions a, .actions button { flex: 0 0 auto; }
+  .sheet { max-width: 390px; margin-left: 0; margin-right: 0; padding-top: 32px; overflow-x: hidden; }
+  .resume-head, .grid, .resume-head > *, .grid > *, .side-card { width: 100%; max-width: 100%; }
+  h1 { font-size: 40px; }
+  .role { font-size: 16px; }
+  p, li, dd, .role, .contact, .impact { word-break: break-all; overflow-wrap: anywhere; }
+}
+@media print {
+  :root { --bg:#fff; --panel:#fff; --ink:#000; --muted:#30343b; --faint:#666; --line:#d7dbe2; --blue:#0b4fa8; }
+  body { font-size: 10pt; }
+  .topbar { display: none; }
+  .sheet { max-width: none; padding: 0 12mm; }
+  .resume-head { grid-template-columns: 1fr 240px; gap: 20px; padding-bottom: 14pt; }
+  h1 { font-size: 28pt; }
+  .role { font-size: 11pt; }
+  .grid { grid-template-columns: 1fr 250px; gap: 22pt; margin-top: 18pt; }
+  section { margin-bottom: 14pt; break-inside: avoid; }
+  h2 { font-size: 8.5pt; margin-bottom: 6pt; }
+  h3, .company { font-size: 11pt; }
+  p, li, .impact, .position, .contact, .side-card dd { font-size: 8.8pt; line-height: 1.45; }
+  .job { padding: 10pt 0; break-inside: avoid; }
+  .side-card { padding: 0; border: 0; background: transparent; break-inside: avoid; }
+  footer { display: none; }
+}
+</style>
 </head>
 <body>
-<nav>
-  <div class="nav-inner">
-    <a class="brand" href="../">민정원 Portfolio</a>
-    <div class="links">
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="../">민정원 Resume</a>
+    <div class="actions">
       <a href="../">Portfolio</a>
-      <a href="./">Resume</a>
+      <button type="button" id="themeToggle">Theme</button>
+      <button type="button" class="print" onclick="window.print()">Print / PDF</button>
     </div>
   </div>
-</nav>
-<main>
-<h1 id="민정원">민정원</h1>
-<p>Product Manager / Product Operations / TPM<br />
-min_jungwon@naver.com</p>
-<h2 id="profile">Profile</h2>
-<p>복잡한 운영을 제품과 시스템으로 바꾸는 11년차 PM/PO/TPM입니다. 보험,
-제조, 인테리어, 회계 도메인에서 ERP, CRM, CMS, 모바일 앱, AI 챗봇, 재무
-데이터 개선 프로젝트를 기획·구축·운영했습니다.</p>
-<p>제가 강한 영역은 단순히 요구사항을 정리하거나 기능을 출시하는 일이
-아닙니다. 흩어진 운영 문제를 사업·사용자·데이터·기술·정책 제약까지
-포함한 제품 문제로 다시 정의하고, 실행 가능한 우선순위와 시스템 구조로
-바꾸는 일입니다. 토스인슈어런스에서는 Product Platform Team의
-TPM/팀리더로서 사용자 3,500명, 계약 60만 건 규모의 전사 ERP, 월 100억+
-수수료 정산 CMS, CRM v2, 설계사 모바일 앱, AI 챗봇 도입과 전사 AI 활용
-프로세스를 리드했습니다.</p>
-<h2 id="product-strengths">Product Strengths</h2>
-<h3 id="문제를-기능-요청이-아니라-비즈니스-구조로-재정의합니다">1.
-문제를 기능 요청이 아니라 비즈니스 구조로 재정의합니다</h3>
-<p>사용자가 “불편하다”고 말하는 지점 뒤에 어떤 운영 리스크와 사업 손실이
-있는지 먼저 봅니다. CRM 사용률이 95%에서 64.5%로 떨어진 문제를 단순 UX
-개선 과제가 아니라 고객 정보 유출, 상담 퍼널 분석 마비, DB 활용 로드맵
-붕괴로 이어지는 비즈니스 인프라 리스크로 정의했습니다. 태아 등재 누락도
-운영 실수가 아니라 ERP 플래그, CMS 산출 기준, Oracle 프로시저,
-대시보드가 연결되지 않은 구조 결함으로 보았습니다.</p>
-<h3 id="value와-viability를-함께-봅니다">2. Value와 Viability를 함께
-봅니다</h3>
-<p>제품이 사용자에게 필요한가뿐 아니라, 회사의 법무·재무·보안·운영 제약
-안에서 지속 가능하게 작동하는지까지 봅니다. 보험 수수료 정산 CMS에서는
-월 100억+ 규모의 정산을 자동화하는 동시에 회계 검증, SAP 싱크, IFRS
-산출, 채권관리규정 변경까지 연결했습니다. 금소법, Android 정책, Google
-Play 삭제 위기처럼 외부 정책 변화가 제품 운영에 미치는 영향도 기능
-범위와 배포 전략에 반영했습니다.</p>
-<h3 id="데이터로-가설을-검증하고-틀린-전제는-바꿉니다">3. 데이터로
-가설을 검증하고, 틀린 전제는 바꿉니다</h3>
-<p>기존 해법을 그대로 실행하기 전에 데이터로 맞는지 확인합니다. 19개월간
-상담 180만 건과 계약 17만 건을 분석해 “상담 물량을 늘리면 계약이
-늘어난다”는 전제가 항상 맞지 않음을 확인했고, 리드 품질과 시스템
-커버리지 중심으로 관점을 전환했습니다. 갱신형 보험 회차역전 문제에서는
-이미 제안된 <code>+12 고정 보정</code>을 SQL 시뮬레이션으로 검증해
-한계를 확인하고, 동적 보정안으로 잔존 오류 0건 경로를 제시했습니다.</p>
-<h3 id="기술-제약을-제품-의사결정으로-번역합니다">4. 기술 제약을 제품
-의사결정으로 번역합니다</h3>
-<p>PM이 모든 기술 결정을 대신해야 한다고 생각하지 않습니다. 대신 k8s,
-Redis, SSO, VPN, 2FA, S3 암호화, Oracle 프로시저, RAG, AI 권한 경계처럼
-제품 운영에 영향을 주는 기술 제약을 이해하고, 개발자·보안·운영·재무가
-판단할 수 있는 언어로 선택지를 정리합니다. 개발 가능성, 사용자 영향,
-보안 리스크, 운영 비용, 일정 리스크를 함께 놓고 우선순위를
-결정합니다.</p>
-<h3 id="ai를-기능이-아니라-업무-시스템으로-도입합니다">5. AI를 기능이
-아니라 업무 시스템으로 도입합니다</h3>
-<p>AI 도입은 “챗봇을 붙이는 일”보다 학습 데이터, 권한, 응답 품질, 실패
-케이스, 운영 책임, 검증 프로세스를 설계하는 일이 중요하다고 봅니다. 인켑
-기반 사내 AI 챗봇 도입에서는 벤더 탐색, 비용·보안 검토, Slack 연동, 응답
-카테고리 재정의, 데이터셋 오류 수정, 웹 확장, 관리자 권한 정리까지 운영
-체계를 만들었습니다. 이후 AI 코드리뷰와 이의 제기 프로세스를 설계해 AI
-결과물을 조직이 어떻게 검증할지까지 정의했습니다.</p>
-<h3 id="이해관계자와-외주를-실행-가능한-운영-체계로-묶습니다">6.
-이해관계자와 외주를 실행 가능한 운영 체계로 묶습니다</h3>
-<p>ERP, CMS, 설계사 앱처럼 외주사와 내부 조직이 함께 움직이는
-프로젝트에서 RFP, SRS, 계약 범위, 주간보고, 월간 미팅, 장애 대응,
-유지보수 기준을 직접 설계했습니다. 외주를 단순 개발 리소스가 아니라 제품
-실행 구조의 일부로 보고, 무엇을 계약 범위로 처리하고 무엇을 별도
-프로젝트로 분리할지 기준을 세웠습니다.</p>
-<h2 id="selected-impact">Selected Impact</h2>
-<ul>
-<li>60명 TF 조직 및 전사 ERP 0→1 구축, 사용자 3,500명·계약 60만 건
-무중단 오픈</li>
-<li>CRM 사용률 95%→64.5% 하락을 비즈니스 인프라 문제로 정의하고 CRM v2
-재구축</li>
-<li>CRM v2 30명+ TF, 3개월 릴리즈, 개발 효율 50%+ 향상</li>
-<li>월 100억+ 수수료 정산 CMS 구축, 엑셀 수작업 제거 및 ERP-CMS-SAP 싱크
-자동화</li>
-<li>규제/상품 변화 대응 48시간 배포, 월 신규 계약 29,746건 및 MoM +67%
-성장에 기여</li>
-<li>태아 등재 6,825건(91.6%) 누락 발굴, IFRS 과소인식 약 3.9억 원 리스크
-식별</li>
-<li>갱신형 회차역전 3.75억 규모 오류 해소 경로 설계, 동적 보정
-시뮬레이션 잔존 0건 확인</li>
-<li>상담 180만 건·계약 17만 건·19개월 데이터 분석으로 계약율 탄력성에
-대한 기존 가설 재검증</li>
-<li>설계사 모바일 앱 외주 7개사 비교·선정, 계약 후 2개월 만에 MVP
-오픈</li>
-<li>사내 첫 AI 챗봇 도입 및 전사 AI 활용 프로세스 확산</li>
-<li>세인홈시스 제조 ERP/CRM/FSM 구축으로 CS 민원 30% 감소</li>
-<li>집닥 BM 재설계로 플랫폼 BEP 달성에 기여</li>
-</ul>
-<h2 id="experience">Experience</h2>
-<h3
-id="토스인슈어런스-product-platform-team-tpm-team-leader">토스인슈어런스
-| Product Platform Team, TPM &amp; Team Leader</h3>
-<p>2022.05 - 현재 | 금융·보험 서비스</p>
-<p>보험사의 내부 운영 시스템을 제품화하는 역할을 맡았습니다. 전사 ERP,
-CRM, CMS, 설계사 앱, AI 챗봇, 재무 데이터 개선 과제를 통해
-계약·정산·영업·운영·보안·회계 데이터가 하나의 업무 흐름으로 연결되도록
-만들었습니다.</p>
-<h4 id="전사-erp-01-구축">전사 ERP 0→1 구축</h4>
-<p>입사 당시 보험 운영 핵심 시스템은 오래된 레거시와 엑셀, 분산된 운영
-도구에 의존하고 있었습니다. 보안 취약성과 데이터 정합성 문제가 있었고,
-인사·조직·계약·상품·수수료·통계가 통합된 기준 시스템이 필요했습니다.</p>
-<ul>
-<li>60명 규모의 개발·DBA·DevOps·보안·QA·운영·외주 TF를 조직하고 실행
-체계 수립</li>
-<li>ERP 도입 목적, 1차 오픈 범위, 보안·운영 우선순위, 데이터
-마이그레이션 기준 정의</li>
-<li>RFP, SRS, 주간보고, 외주 협업 프로토콜, 장애 대응 체계를 설계</li>
-<li>3개년 데이터 클렌징·마이그레이션과 ERP-CMS 인터페이스 통합 추진</li>
-<li>k8s, Redis, 로그 이중화, AD, VPN, 마스킹 등 기술·보안 제약을 제품
-요구사항에 반영</li>
-<li>사용자 3,500명, 계약 60만 건 규모 ERP 무중단 오픈 및 이후 4년+ 운영
-안정화</li>
-</ul>
-<p>이 프로젝트의 핵심 결과는 ERP 기능 출시가 아니라, 보험사의
-계약·정산·운영 데이터가 이후 CRM, CMS, SAP, AI 프로젝트의 기준
-시스템으로 작동할 수 있게 만든 것입니다.</p>
-<h4 id="crm-v2-재구축-및-영업-운영-고도화">CRM v2 재구축 및 영업 운영
-고도화</h4>
-<p>CRM 사용률 하락은 단순한 화면 개선 이슈가 아니었습니다. 설계사들이
-엑셀과 외부 도구로 고객을 관리하면서 고객 정보 리스크, 상담 퍼널 분석
-공백, DB 활용 로드맵 붕괴가 동시에 발생하고 있었습니다.</p>
-<ul>
-<li>CRM 사용률 95%→64.5% 하락을 비즈니스 인프라 리스크로 정의</li>
-<li>실제 설계사 사용 방식과 고객 데이터 1만 건을 확인해 핵심 화면과 정보
-구조 재정의</li>
-<li>고객 리스트, 상세, 보장분석, 네비게이터, 엑셀, 어드민 등 사용자 흐름
-기준으로 백로그 정렬</li>
-<li>30명+ TF와 3개월 내 CRM v2 릴리즈, TDS 적용으로 개발 속도와 UI
-일관성 개선</li>
-<li>ERP-CRM 장애 격리, SSO 통합, VPN→2FA 전환 등 운영·보안 구조
-개선</li>
-<li>상담신청→버퍼계정→설계사배정→고객컨택→ERP계약 5단계 퍼널 정의</li>
-<li>상담 180만 건, 계약 17만 건, 19개월 데이터를 분석해 계약율 탄력성에
-대한 기존 가설 재검증</li>
-</ul>
-<p>이 경험은 제가 제품을 “화면”이 아니라 사용자 행동, 데이터 흐름, 보안,
-영업 생산성이 연결된 비즈니스 인프라로 본다는 점을 보여줍니다.</p>
-<h4 id="수수료-정산-cms-및-ifrs-시스템">수수료 정산 CMS 및 IFRS
-시스템</h4>
-<p>보험 수수료 정산은 조직, 직급, 상품, 유형, 보증, 환수, 분급 등 복잡한
-조건이 얽힌 고위험 운영 영역이었습니다. 수작업과 엑셀 검산에 의존하면
-휴먼에러와 회계 리스크가 반복될 수밖에 없었습니다.</p>
-<ul>
-<li>월 100억+ 수수료 정산을 자동화하고 엑셀 수작업 제거</li>
-<li>조직·직급·상품·유형별 정산 로직 표준화 및 검증 지점 시스템화</li>
-<li>모집자 순번, 모집자/수금자 비교, 합산 100% 미달 차단 등 수수료율
-검증 로직 설계</li>
-<li>ERP-CMS-SAP 데이터 싱크 자동화, IFRS 이연수익·선급비용 자동 산출
-구조 설계</li>
-<li>개발 검증과 회계 검수를 분리한 이중 검증 체계 도입</li>
-<li>채권관리규정 개정 시 125개 댓글 논의를 ERP+CMS 변경 명세로
-구조화</li>
-</ul>
-<p>정산을 월말에 맞추는 업무가 아니라 회계 무결성과 내부 통제를 지탱하는
-제품 시스템으로 전환한 경험입니다.</p>
-<h4 id="설계사-모바일-앱-및-외부-정책-대응">설계사 모바일 앱 및 외부
-정책 대응</h4>
-<p>설계사 앱은 단순 모바일 CRM이 아니라 외부 활동 중인 설계사가 고객
-확인, 연락, 상담, 보장분석, 문서 확인을 이어갈 수 있게 하는 현장 영업
-인프라였습니다.</p>
-<ul>
-<li>설계사 현장 업무를 분석해 모바일에서 필요한 고객 확인·상담·문서 흐름
-정의</li>
-<li>코어 PD 파견이 어려운 상황에서 SD UI와 외주 개발 조합으로 실행 경로
-전환</li>
-<li>외주 7개사 비교 후 개발사 선정, 계약 후 2개월 만에 MVP 1차 오픈</li>
-<li>금소법 비교설명확인서, 카카오 인앱 브라우저, Android 14/15, Google
-Play 삭제 위기 대응</li>
-<li>설계사 DB 활용 6단계 로드맵을 설계해 후속 CRM·영업지원 프로젝트의
-사업 논거 마련</li>
-</ul>
-<h4 id="ai-챗봇-도입-및-전사-ai-활용-프로세스">AI 챗봇 도입 및 전사 AI
-활용 프로세스</h4>
-<p>사내 반복 문의와 문서 탐색 비용을 줄이기 위해 AI 챗봇 도입을
-추진했습니다. 중요한 것은 AI 기능을 붙이는 것이 아니라, 어떤 데이터를
-학습시키고, 어디까지 답변하게 하며, 실패 케이스를 어떻게 운영할지 정하는
-일이었습니다.</p>
-<ul>
-<li>인켑(Inkeep) 기반 사내 AI 챗봇 도입을 단독 리드</li>
-<li>벤더 탐색, 비용·보안 검토, 데모, Slack 연동, 운영 정착 추진</li>
-<li>응답 카테고리와 데이터셋 오류를 직접 발견·수정하고 품질 개선 루프
-설계</li>
-<li>웹 확장, 관리자 권한 정리, 구 계정 정리 등 운영 위생 관리</li>
-<li>Claude Desktop 사내 발표, AI 코드리뷰, 이의 제기 프로세스 설계로
-전사 AI 활용 확산</li>
-<li>외부 설계사용 AI 보험 UW 플랫폼의 API, 관리자 콘솔, 감사 로그,
-도메인 스키마 구조 기획</li>
-</ul>
-<p>AI를 실험이 아니라 반복 업무 절감, 온보딩 탐색 비용 감소, 의사결정
-보조, 품질 검증 프로세스로 연결한 경험입니다.</p>
-<h4 id="재무-데이터-이상-탐지-및-시스템-개선">재무 데이터 이상 탐지 및
-시스템 개선</h4>
-<p>운영팀도 인식하지 못한 데이터 불일치를 재무 리스크로 계량하고, 단발성
-수정이 아닌 재발 방지 구조로 전환했습니다.</p>
-<ul>
-<li>ERP 태아 등재 8,122건과 CMS 태아 인식 685건의 불일치 확인</li>
-<li>태아 등재 6,825건(91.6%) 누락과 IFRS 과소인식 약 3.9억 원 리스크
-발굴</li>
-<li>DB 컬럼, Oracle 프로시저, 대시보드까지 이어지는 3레이어 개선 방향
-제시</li>
-<li>갱신형 회차역전 비중 급증 문제에서 <code>+12 고정 보정</code>의
-한계를 SQL 시뮬레이션으로 검증</li>
-<li>당월 회차 직접 치환 방식의 동적 보정안으로 양수NET 잔존 오류 0건
-경로 제시</li>
-</ul>
-<p>이 경험은 데이터를 리포팅하는 수준이 아니라, 데이터로 틀린 전제를
-발견하고 시스템 개선 과제로 바꾸는 방식의 일입니다.</p>
-<h4 id="조직-운영-및-거버넌스">조직 운영 및 거버넌스</h4>
-<ul>
-<li>시스템 플랫폼팀 운영 구조를 만들고 6개월 내 안정화</li>
-<li>월 70건+ 병렬 과제를 내부 개발·외주·보안·운영 조직과 함께 관리</li>
-<li>DRI 체계, 회고 프로그램, 주간 성과 브리핑을 정례화</li>
-<li>보안 협업 R&amp;R을 정책 우선에서 리스크 우선 프레임으로 재설계</li>
-<li>외주 유지보수 계약, 월간 미팅 아젠다, 장애 보고서 포맷 등 협업
-프로토콜 표준화</li>
-</ul>
-<h3 id="세인홈시스-서비스-기획팀-프로">세인홈시스 | 서비스 기획팀,
-프로</h3>
-<p>2021.02 - 2022.02 | 가전 제조 / 오프라인 CS</p>
-<p>제조사 서비스 현장의 고객, 민원, 재고, 기사 방문, 대리점 수불
-데이터를 시스템화했습니다. 이 경험은 이후 보험 설계사 앱과 현장 영업지원
-시스템을 이해하는 기반이 되었습니다.</p>
-<ul>
-<li>30명+ TF로 제조사 ERP-CRM 통합 시스템 구축</li>
-<li>수기·엑셀 기반 고객·민원·재고 데이터를 전산화</li>
-<li>QR/GPS 기반 현장 서비스 관리(FSM) 모바일 앱 구축</li>
-<li>예약→방문→설치→확인 퍼널과 기사 배정·알림톡·현장 수불 흐름
-디지털화</li>
-<li>CS 민원 30% 감소, 전국 대리점 수불과 현장 서비스 흐름 가시화</li>
-</ul>
-<h3 id="집닥-사업-기획팀-팀장">집닥 | 사업 기획팀, 팀장</h3>
-<p>2019.04 - 2020.12 | 인테리어 플랫폼</p>
-<p>인테리어 플랫폼의 수익성과 운영 품질을 데이터 기반으로
-재설계했습니다. 이 경험은 이후 보험 리드 품질, 계약율, 수수료, DB 활용을
-사업성과 연결해 보는 관점으로 이어졌습니다.</p>
-<ul>
-<li>CAC·LTV·ROI 분석으로 만성 적자 BM의 한계수익 체감 진단</li>
-<li>고객 DB 등급제와 파트너 등급제 설계</li>
-<li>리드→매칭→시공 전환율과 수익 구조 개선</li>
-<li>3개년 시스템 구축 로드맵과 전사 OKR 정렬</li>
-<li>매출, 마진, 비용 구조, CAC/LTV 기반 주주·경영진 IR 자료 작성</li>
-<li>플랫폼 BEP 달성에 기여</li>
-</ul>
-<h3 id="더존-키컴-사업-기획팀-사원">더존 키컴 | 사업 기획팀, 사원</h3>
-<p>2017.05 - 2018.10 | 회계 시스템 / 웹팩스</p>
-<p>회계 시스템과 웹팩스 사업 기획 경험은 이후 CMS, IFRS, SAP 연동
-프로젝트에서 회계 무결성과 정산 로직을 이해하는 기반이 되었습니다.</p>
-<ul>
-<li>신규 제품·서비스 프로모션 기획 및 예상 매출·손익 시뮬레이션</li>
-<li>고객 만족도 전수 조사와 인터뷰 운영, 개선 과제 도출</li>
-<li>VIP 핵심 고객 전용 솔루션 및 신규 플랫폼 서비스 PoC/런칭 기획</li>
-</ul>
-<h2 id="working-style">Working Style</h2>
-<ul>
-<li>문제를 바로 기능으로 만들지 않고, 원인 구조와 사업 리스크를 먼저
-정의합니다.</li>
-<li>사용자 가치와 사업성, 보안·법무·재무·운영 제약을 함께
-검토합니다.</li>
-<li>데이터가 기존 가설과 다르면 가설을 바꾸고, 필요한 경우 이미 정해진
-해법도 재검증합니다.</li>
-<li>개발자처럼 말하려 하기보다, 개발자가 판단하기 쉬운 선택지와
-우선순위를 정리합니다.</li>
-<li>외주와 내부 조직의 책임 경계를 문서화하고, 회의체·보고·장애
-대응·유지보수 기준을 운영 체계로 만듭니다.</li>
-<li>AI는 도구 도입보다 업무 흐름, 권한, 품질, 검증 루프 안에 넣는 것이
-중요하다고 봅니다.</li>
-</ul>
-<h2 id="domain-tools">Domain &amp; Tools</h2>
-<ul>
-<li>Domain: 보험, ERP/CRM/CMS, 정산·회계, AI 업무 자동화, 모바일 앱,
-제조 FSM, 인테리어 플랫폼, 회계 시스템</li>
-<li>Product/Collaboration: Notion, Jira, Slack, Google Workspace,
-Figma</li>
-<li>AI: Claude, Gemini</li>
-<li>Analytics/Monitoring: Grafana, Kibana, Graylog, Amplitude, GA</li>
-<li>Infra/Security Context: AD, 2FA, VPN, k8s, Redis, ISO27001 기준
-적용</li>
-</ul>
-<h2 id="education">Education</h2>
-<p>강남대학교 경제학과 | 2008.03 - 2015.07</p>
+</header>
+
+<main class="sheet">
+  <header class="resume-head">
+    <div>
+      <h1>민정원</h1>
+      <div class="role">Product Owner · Product Manager · TPM · 9년차</div>
+    </div>
+    <div class="contact">
+      <span>min_jungwon@naver.com</span>
+      <span>강남대학교 경제학과</span>
+      <span>보험 · ERP/CRM/CMS · AI · 제조 FSM</span>
+    </div>
+  </header>
+
+  <div class="grid">
+    <div>
+      <section>
+        <h2>Profile</h2>
+        <p>복잡한 운영 문제를 제품 판단과 실행 시스템으로 바꾸는 9년차 Product Owner/Product Manager/TPM입니다. 회계 시스템, 인테리어 플랫폼, 제조 ERP/CRM/FSM, 보험 ERP/CMS/CRM까지 도메인을 옮기며 사업 모델·현장 운영·정산/회계·영업 데이터를 제품 시스템으로 바꿔왔습니다.</p>
+        <p>강한 영역은 요구사항 정리나 기능 출시가 아니라, 흩어진 운영 문제를 사업·사용자·데이터·기술·정책 제약까지 포함한 제품 문제로 다시 정의하고 여러 이해관계자가 같은 기준으로 움직이게 만드는 일입니다.</p>
+      </section>
+
+      <section>
+        <h2>Core PM Strengths</h2>
+        <div class="strength"><h3>1. 문제를 사업/운영 구조로 재정의합니다</h3><p>CRM 사용률 95%→64.5% 하락을 단순 UX 문제가 아니라 고객정보, 상담 퍼널, DB 활용 로드맵 리스크로 정의했습니다.</p></div>
+        <div class="strength"><h3>2. 비용·리스크·사용자 가치·기술 제약을 함께 봅니다</h3><p>금소법 비교설명확인서 외부 솔루션 월 283만/226만 원과 자체 구축 월 3만 원을 비교해 자체 구축을 선택했습니다.</p></div>
+        <div class="strength"><h3>3. 데이터로 가설을 검증하고 틀린 전제는 바꿉니다</h3><p>상담 180만 건, 계약 17만 건, 19개월 데이터로 “상담 물량 = 계약 성장” 전제를 검증했습니다.</p></div>
+        <div class="strength"><h3>4. 기술 제약을 제품 의사결정 언어로 번역합니다</h3><p>k8s, Redis, SSO, VPN, 2FA, S3 암호화, Oracle, 마스킹, RPA, API 제약을 일정·리스크·운영 비용 기준으로 정리합니다.</p></div>
+        <div class="strength"><h3>5. 출시 이후 운영 체계까지 설계합니다</h3><p>RFP, SRS, 주간보고, 장애 대응, 유지보수 기준을 만들고 ASP 종료 이후 내부 이슈 접수 체계까지 전환했습니다.</p></div>
+      </section>
+
+      <section>
+        <h2>Selected Impact</h2>
+        <div class="impact-grid">
+          <div class="impact"><b>집닥 BM 재설계</b> · CAC/LTV/ROI 분석으로 플랫폼 BEP 기여</div>
+          <div class="impact"><b>세인홈시스 ERP/CRM/FSM</b> · 30명+ TF, CS 민원 30% 감소</div>
+          <div class="impact"><b>전사 ERP 0→1</b> · 60명 TF, 사용자 3,500명·계약 60만 건</div>
+          <div class="impact"><b>CRM v2</b> · 30명+ TF, 3개월 릴리즈</div>
+          <div class="impact"><b>CMS</b> · 월 100억+ 수수료 정산 자동화</div>
+          <div class="impact"><b>태아 등재 누락</b> · 6,825건, IFRS 약 3.9억 리스크 식별</div>
+          <div class="impact"><b>회차역전 오류</b> · 3.75억 규모, 동적 보정안 제시</div>
+          <div class="impact"><b>AI UW PoC</b> · API/관리자/감사 로그/스키마 기획</div>
+          <div class="impact"><b>ASP 종료</b> · 소스코드 1.2억 매입, 내재화 로드맵 설계</div>
+          <div class="impact"><b>조직 설계</b> · TPM 채용 JD 작성, PM/TPM 역할 분리</div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Experience</h2>
+        <article class="job">
+          <div class="job-head"><div class="company">토스인슈어런스</div><div class="period">2022.05 - 현재</div></div>
+          <div class="position">Product Platform Team · TPM & Team Leader · 금융/보험</div>
+          <p>보험사의 내부 운영 시스템을 제품화하는 역할. ERP, CRM, CMS, 설계사 앱, SAP/IFRS 연동, AI 챗봇, 재무 데이터 개선 과제를 통해 계약·정산·영업·운영·보안·회계 데이터가 하나의 업무 흐름으로 연결되도록 만들었습니다.</p>
+          <div class="subhead">ERP/CMS/SAP</div>
+          <ul><li>ERP 도입 목적, 1차 오픈 범위, 보안·운영 우선순위, 데이터 마이그레이션 기준 정의</li><li>사용자 3,500명, 계약 60만 건 규모 ERP 무중단 오픈 및 4년+ 운영 안정화</li><li>월 100억+ CMS 정산 자동화, ERP-CMS-SAP 싱크 구조 설계</li><li>IFRS 기말잔액 마이그레이션 범위와 SAP-CMS 검증 기준 조율</li></ul>
+          <div class="subhead">CRM v2</div>
+          <ul><li>CRM 사용률 95%→64.5% 하락을 고객정보, 상담 퍼널, DB 활용 리스크로 재정의</li><li>고객 데이터 1만 건 확인, 사용자 흐름 기준 백로그 정렬</li><li>상담신청→버퍼계정→설계사배정→고객컨택→ERP계약 5단계 퍼널 정의</li></ul>
+          <div class="subhead">앱 / AI / ASP / 조직</div>
+          <ul><li>설계사 모바일 앱 외주 7개사 비교, 계약 후 2개월 MVP 오픈</li><li>사내 AI 챗봇 도입, AI 코드리뷰 이의 제기 프로세스 설계, AI UW PoC 기획</li><li>소스코드 1.2억 매입, 명세서 CRM→CMS 수수료→ERP 완전 내재화 순서 설계</li><li>PM/TPM 역할 분리 프레임화, TPM 채용 JD 직접 작성</li></ul>
+        </article>
+        <article class="job">
+          <div class="job-head"><div class="company">세인홈시스</div><div class="period">2021.02 - 2022.02</div></div>
+          <div class="position">서비스 기획팀 · 프로 · 가전 제조/오프라인 CS</div>
+          <ul><li>30명+ TF로 제조사 ERP-CRM 통합 시스템 구축</li><li>수기·엑셀 기반 고객·민원·재고 데이터 전산화</li><li>QR/GPS 기반 FSM 모바일 앱 구축</li><li>CS 민원 30% 감소, 전국 대리점 수불과 현장 서비스 흐름 가시화</li></ul>
+        </article>
+        <article class="job">
+          <div class="job-head"><div class="company">집닥</div><div class="period">2019.04 - 2020.12</div></div>
+          <div class="position">사업기획팀 · 매니저 · 인테리어 플랫폼</div>
+          <ul><li>CAC·LTV·ROI 분석으로 만성 적자 BM 진단</li><li>고객 DB 등급제와 파트너 등급제 설계</li><li>3개년 시스템 로드맵과 전사 OKR 정렬</li><li>플랫폼 BEP 달성에 기여</li></ul>
+        </article>
+        <article class="job">
+          <div class="job-head"><div class="company">더존 키컴</div><div class="period">2017.05 - 2018.10</div></div>
+          <div class="position">사업 기획팀 · 사원 · 회계 시스템/웹팩스</div>
+          <ul><li>신규 제품·서비스 프로모션과 예상 매출·손익 시뮬레이션</li><li>고객 만족도 전수 조사와 인터뷰 운영</li><li>VIP 핵심 고객 전용 솔루션 및 신규 플랫폼 PoC/런칭 기획</li></ul>
+        </article>
+      </section>
+    </div>
+
+    <aside>
+      <div class="side-card">
+        <h2>Working Style</h2>
+        <ul class="style-list"><li>요청을 기능으로 바꾸기 전에 사업적 의미를 정의</li><li>비용·리스크·사용자 가치·기술 제약을 함께 비교</li><li>데이터가 가설과 다르면 가설을 바꿈</li><li>외주와 내부 책임 경계를 문서화</li><li>AI는 업무 흐름·권한·품질·검증 루프 안에 넣음</li></ul>
+      </div>
+      <div class="side-card">
+        <h2>Domain</h2>
+        <dl><dt>Industries</dt><dd>보험 · 회계 시스템 · 인테리어 플랫폼 · 가전 제조</dd><dt>Systems</dt><dd>ERP · CRM · CMS · SAP/IFRS · FSM · 모바일 앱</dd><dt>Functions</dt><dd>정산/회계 · 영업 운영 · 외주 관리 · AI 업무 자동화</dd></dl>
+      </div>
+      <div class="side-card">
+        <h2>Tools</h2>
+        <dl><dt>Product</dt><dd>Notion · Jira · Slack · Google Workspace · Figma</dd><dt>AI</dt><dd>Claude · Gemini</dd><dt>Monitoring</dt><dd>Grafana · Kibana · Graylog · Amplitude · GA</dd><dt>Infra/Security</dt><dd>AD · 2FA · VPN · k8s · Redis · ISO27001 기준</dd></dl>
+      </div>
+      <div class="side-card">
+        <h2>Contact</h2>
+        <dl><dt>Email</dt><dd>min_jungwon@naver.com</dd><dt>Portfolio</dt><dd><a href="../">민정원 Evidence Console</a></dd></dl>
+      </div>
+    </aside>
+  </div>
+  <footer>Min Jeong Won · Product Owner / Product Manager / TPM · Resume</footer>
 </main>
+<script>
+const root = document.documentElement;
+const toggle = document.getElementById('themeToggle');
+const saved = localStorage.getItem('theme') || 'light';
+if (saved === 'dark') root.dataset.theme = 'dark';
+toggle.addEventListener('click', () => {
+  const dark = root.dataset.theme !== 'dark';
+  root.dataset.theme = dark ? 'dark' : '';
+  localStorage.setItem('theme', dark ? 'dark' : 'light');
+});
+</script>
 </body>
 </html>
