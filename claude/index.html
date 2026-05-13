@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>민정원 · Product Portfolio</title>
+<meta name="description" content="민정원 — 9년차 PO/PM/TPM. 7개 케이스를 가로지르는 5개 의사결정 패턴.">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono@master/web/css/jetbrains-mono.css">
+<style>
+:root {
+  --bg: #0A0A0B;
+  --surface: #131318;
+  --surface-2: #1C1C23;
+  --surface-3: #25252E;
+  --border: #2A2A33;
+  --border-strong: #3D3D48;
+  --text: #ECECEF;
+  --text-2: #A8A8B0;
+  --text-3: #6B6B74;
+  --text-faint: #46464E;
+  --p1: #A78BFA;  /* purple — 비용 대비 가치 */
+  --p2: #F472B6;  /* pink — 개발 안 하고 풀기 */
+  --p3: #34D399;  /* green — 외주 협상 */
+  --p4: #FBBF24;  /* amber — 옵션 펼치기 */
+  --p5: #60A5FA;  /* blue — 영역 경계 넘기 */
+  --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --sans: 'Pretendard Variable', Pretendard, ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+:root[data-theme="light"] {
+  --bg: #FAFAFC;
+  --surface: #FFFFFF;
+  --surface-2: #F4F4F6;
+  --surface-3: #E9E9EE;
+  --border: #E0E0E5;
+  --border-strong: #C8C8CF;
+  --text: #0F0F12;
+  --text-2: #4A4A52;
+  --text-3: #7A7A82;
+  --text-faint: #B5B5BC;
+  --p1: #7C3AED;
+  --p2: #DB2777;
+  --p3: #059669;
+  --p4: #D97706;
+  --p5: #2563EB;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+  font-size: 15.5px;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'tnum', 'cv11';
+  transition: background 0.2s, color 0.2s;
+}
+.mono, code, kbd { font-family: var(--mono); font-feature-settings: normal; }
+a { color: var(--text); text-decoration: none; border-bottom: 1px dashed var(--border-strong); }
+a:hover { color: var(--p5); border-bottom-color: var(--p5); }
+
+/* Top nav */
+.topnav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(10, 10, 11, 0.85);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+:root[data-theme="light"] .topnav { background: rgba(250, 250, 252, 0.85); }
+.topnav-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 14px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+}
+.topnav .brand {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  border: none;
+}
+.topnav .brand b { color: var(--text); font-weight: 600; }
+.topnav .right { display: flex; gap: 4px; align-items: center; }
+.topnav .right a, .topnav .right button {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 6px 11px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.topnav .right a:hover, .topnav .right button:hover { color: var(--text); border-color: var(--border-strong); }
+
+/* Layout: pattern lens (left fixed) + content */
+.layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  max-width: 1180px;
+  margin: 0 auto;
+  gap: 0;
+}
+
+aside.lens {
+  padding: 56px 24px 56px 28px;
+  position: sticky;
+  top: 56px;
+  height: calc(100vh - 56px);
+  overflow-y: auto;
+  border-right: 1px solid var(--border);
+}
+.lens-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 14px;
+}
+.lens-help {
+  font-size: 12px;
+  color: var(--text-3);
+  margin-top: 18px;
+  line-height: 1.5;
+}
+.lens-help button {
+  background: none;
+  border: none;
+  color: var(--text-2);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 0;
+  border-bottom: 1px dashed var(--border-strong);
+}
+.lens-help button:hover { color: var(--p5); border-bottom-color: var(--p5); }
+
+.pattern-chip {
+  display: block;
+  width: 100%;
+  background: none;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--p1);
+  border-radius: 6px;
+  padding: 10px 12px;
+  text-align: left;
+  margin: 6px 0;
+  cursor: pointer;
+  font-family: var(--sans);
+  color: var(--text-2);
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.pattern-chip:hover { background: var(--surface); color: var(--text); }
+.pattern-chip .pn {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+.pattern-chip .pt {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+}
+.pattern-chip.p1 { border-left-color: var(--p1); }
+.pattern-chip.p2 { border-left-color: var(--p2); }
+.pattern-chip.p3 { border-left-color: var(--p3); }
+.pattern-chip.p4 { border-left-color: var(--p4); }
+.pattern-chip.p5 { border-left-color: var(--p5); }
+.pattern-chip.active {
+  background: var(--surface-2);
+  color: var(--text);
+  border-color: var(--border-strong);
+}
+.pattern-chip.p1.active { background: color-mix(in srgb, var(--p1) 14%, var(--surface)); border-left-width: 3px; }
+.pattern-chip.p2.active { background: color-mix(in srgb, var(--p2) 14%, var(--surface)); }
+.pattern-chip.p3.active { background: color-mix(in srgb, var(--p3) 14%, var(--surface)); }
+.pattern-chip.p4.active { background: color-mix(in srgb, var(--p4) 14%, var(--surface)); }
+.pattern-chip.p5.active { background: color-mix(in srgb, var(--p5) 14%, var(--surface)); }
+
+main {
+  padding: 56px 56px 96px;
+  max-width: 820px;
+  width: 100%;
+}
+
+/* Hero */
+.hero {
+  margin-bottom: 80px;
+}
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--p5);
+  margin-bottom: 22px;
+}
+h1 {
+  font-size: clamp(38px, 5.5vw, 56px);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  margin-bottom: 28px;
+  color: var(--text);
+}
+h1 .em { color: var(--p5); }
+h1 .strike { text-decoration: line-through; text-decoration-color: var(--text-faint); color: var(--text-3); font-weight: 400; }
+.lead {
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--text-2);
+  max-width: 640px;
+  margin-bottom: 16px;
+}
+.lead strong { color: var(--text); font-weight: 600; }
+.sublead {
+  font-size: 14px;
+  color: var(--text-3);
+  max-width: 640px;
+  line-height: 1.7;
+}
+
+/* Section header */
+section { margin: 80px 0; scroll-margin-top: 80px; }
+section h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+section h2 .num {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-3);
+  letter-spacing: 0.05em;
+}
+.sec-sub {
+  font-size: 14px;
+  color: var(--text-3);
+  margin-bottom: 32px;
+  max-width: 640px;
+}
+
+/* Pattern cards */
+.patterns {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+.pcard {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 22px 24px;
+  background: var(--surface);
+  transition: opacity 0.25s, border-color 0.15s;
+}
+.pcard.p1 { border-left: 3px solid var(--p1); }
+.pcard.p2 { border-left: 3px solid var(--p2); }
+.pcard.p3 { border-left: 3px solid var(--p3); }
+.pcard.p4 { border-left: 3px solid var(--p4); }
+.pcard.p5 { border-left: 3px solid var(--p5); }
+.pcard-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.pcard-head .pn {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--text-3);
+}
+.pcard.p1 .pn { color: var(--p1); }
+.pcard.p2 .pn { color: var(--p2); }
+.pcard.p3 .pn { color: var(--p3); }
+.pcard.p4 .pn { color: var(--p4); }
+.pcard.p5 .pn { color: var(--p5); }
+.pcard h3 {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  color: var(--text);
+}
+.pcard .def {
+  font-size: 14px;
+  color: var(--text-2);
+  line-height: 1.65;
+  margin: 8px 0 16px;
+}
+.pcard .quote {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--text-2);
+  background: var(--surface-2);
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin: 12px 0;
+  line-height: 1.6;
+  border-left: 2px solid var(--text-faint);
+}
+.pcard .ev-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin: 14px 0 8px;
+}
+.pcard .ev-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.ev-chip {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  background: var(--surface-2);
+  color: var(--text-2);
+  padding: 4px 9px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all 0.15s;
+  text-decoration: none;
+}
+.ev-chip:hover { color: var(--text); background: var(--surface-3); border-color: var(--border-strong); }
+
+/* Filtering states */
+.filtering .pcard:not(.is-active) { opacity: 0.28; }
+.filtering .case:not(.is-active) { opacity: 0.28; }
+.filtering .ev-chip { opacity: 0.4; }
+.filtering .pcard.is-active .ev-chip { opacity: 1; }
+
+/* Evidence map (matrix) */
+.matrix {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--surface);
+  margin-top: 14px;
+}
+.matrix-row {
+  display: grid;
+  grid-template-columns: 200px repeat(5, 1fr) 96px;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  padding: 10px 14px;
+  gap: 12px;
+}
+.matrix-row:last-child { border-bottom: none; }
+.matrix-row.head { background: var(--surface-2); }
+.matrix-row.head > div {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  text-align: center;
+}
+.matrix-row.head > div:first-child { text-align: left; }
+.matrix-row .case-cell {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+.matrix-row .case-cell .case-co {
+  display: block;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--text-3);
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+.dot {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--surface-3);
+  transition: transform 0.15s;
+}
+.matrix-row > div { text-align: center; }
+.matrix-row > div:first-child { text-align: left; }
+.matrix-row > div:last-child { text-align: right; }
+.dot.on1 { background: var(--p1); box-shadow: 0 0 14px color-mix(in srgb, var(--p1) 40%, transparent); }
+.dot.on2 { background: var(--p2); box-shadow: 0 0 14px color-mix(in srgb, var(--p2) 40%, transparent); }
+.dot.on3 { background: var(--p3); box-shadow: 0 0 14px color-mix(in srgb, var(--p3) 40%, transparent); }
+.dot.on4 { background: var(--p4); box-shadow: 0 0 14px color-mix(in srgb, var(--p4) 40%, transparent); }
+.dot.on5 { background: var(--p5); box-shadow: 0 0 14px color-mix(in srgb, var(--p5) 40%, transparent); }
+.matrix-row .count {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--text);
+  text-align: right;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.matrix-row .count .star {
+  color: var(--p4);
+  margin-left: 4px;
+  font-size: 12px;
+}
+.matrix-row .count .pre-star {
+  color: var(--text-3);
+  margin-left: 4px;
+  font-size: 11px;
+}
+.matrix-row .count .denom { color: var(--text-3); font-weight: 400; }
+
+/* Legend below matrix */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 22px;
+  margin-top: 16px;
+  padding: 14px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--text-2);
+  letter-spacing: 0.02em;
+}
+.legend-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.legend-dot.p1 { background: var(--p1); }
+.legend-dot.p2 { background: var(--p2); }
+.legend-dot.p3 { background: var(--p3); }
+.legend-dot.p4 { background: var(--p4); }
+.legend-dot.p5 { background: var(--p5); }
+
+/* Cases */
+.case {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px 26px;
+  background: var(--surface);
+  margin-bottom: 14px;
+  transition: opacity 0.25s, border-color 0.15s;
+}
+.case-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.case-meta {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 6px;
+}
+.case h3 {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.32;
+  color: var(--text);
+}
+.case-dots {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  margin-top: 4px;
+}
+.case-dots .d {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--surface-3);
+}
+.case-dots .d.on1 { background: var(--p1); }
+.case-dots .d.on2 { background: var(--p2); }
+.case-dots .d.on3 { background: var(--p3); }
+.case-dots .d.on4 { background: var(--p4); }
+.case-dots .d.on5 { background: var(--p5); }
+.case-thesis {
+  font-size: 15.5px;
+  color: var(--text);
+  line-height: 1.65;
+  margin: 14px 0;
+  padding-left: 16px;
+  border-left: 2px solid var(--text-faint);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.case-body {
+  font-size: 14px;
+  color: var(--text-2);
+  line-height: 1.7;
+  margin: 12px 0;
+}
+.case-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 14px 0;
+}
+.case-metrics .m {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.case-metrics .m .v {
+  font-family: var(--mono);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+.case-metrics .m .l {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.case-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--border);
+}
+.case-links .lk {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-3);
+  letter-spacing: 0.04em;
+  border: none;
+}
+.case-links .lk-h {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-right: 6px;
+}
+
+/* Arc — minimal timeline */
+.arc {
+  display: grid;
+  gap: 24px;
+  margin-top: 8px;
+}
+.arc-item {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 22px;
+  align-items: start;
+}
+.arc-item .arc-co {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: var(--text-3);
+  padding-top: 2px;
+}
+.arc-item .arc-co b {
+  display: block;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 2px;
+  letter-spacing: -0.01em;
+  font-family: var(--sans);
+}
+.arc-item p {
+  font-size: 14px;
+  color: var(--text-2);
+  line-height: 1.7;
+}
+
+/* Fit list — simple */
+.fit {
+  display: grid;
+  gap: 12px;
+}
+.fit-item {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 20px;
+  background: var(--surface);
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+.fit-item .fi-n {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-3);
+  padding-top: 1px;
+  letter-spacing: 0.05em;
+}
+.fit-item h3 {
+  font-size: 14.5px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.fit-item p {
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.6;
+}
+
+/* Summary */
+.summary {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px 32px;
+  background: var(--surface);
+}
+.summary .punch {
+  font-size: 17px;
+  line-height: 1.55;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 14px;
+  font-weight: 500;
+}
+.summary p {
+  font-size: 14px;
+  color: var(--text-2);
+  line-height: 1.7;
+}
+.summary .cta {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+.summary .cta a {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  border: 1px solid var(--border-strong);
+  border-radius: 4px;
+  color: var(--text);
+}
+.summary .cta a.primary { background: var(--p5); border-color: var(--p5); color: var(--bg); }
+.summary .cta a:hover { border-color: var(--p5); color: var(--p5); }
+.summary .cta a.primary:hover { color: var(--bg); opacity: 0.85; }
+
+footer {
+  margin-top: 64px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--text-faint);
+}
+
+/* Mobile */
+@media (max-width: 980px) {
+  .layout { grid-template-columns: 1fr; }
+  aside.lens {
+    position: relative;
+    top: 0;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: 24px 22px;
+  }
+  main { padding: 36px 22px 72px; }
+  .matrix-row { grid-template-columns: 130px repeat(5, 1fr) 56px; padding: 8px 10px; gap: 8px; }
+  .matrix-row .case-cell { font-size: 11px; }
+  .dot { width: 11px; height: 11px; }
+}
+@media (max-width: 640px) {
+  .matrix { display: block; }
+  .matrix-row { grid-template-columns: 1fr; gap: 6px; padding: 12px; }
+  .matrix-row.head { display: none; }
+  .matrix-row .case-cell { margin-bottom: 6px; }
+  .matrix-row > div:not(:first-child):not(:last-child) {
+    display: inline-block;
+    margin-right: 6px;
+  }
+  .dot { display: inline-block; width: 14px; height: 14px; vertical-align: middle; margin: 0; }
+}
+</style>
+</head>
+<body>
+
+<header class="topnav">
+  <div class="topnav-inner">
+    <a class="brand" href="#top"><b>MJW</b> · Min Jeong Won</a>
+    <div class="right">
+      <a href="./resume/">Resume →</a>
+      <button id="themeBtn" aria-label="Toggle theme">Theme</button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+
+  <aside class="lens">
+    <div class="lens-label">Pattern Lens</div>
+    <button class="pattern-chip p1" data-p="1"><span class="pn">P1</span><span class="pt">비용 대비 가치부터</span></button>
+    <button class="pattern-chip p2" data-p="2"><span class="pn">P2</span><span class="pt">개발 안 하고 풀기</span></button>
+    <button class="pattern-chip p3" data-p="3"><span class="pn">P3</span><span class="pt">계약서·증적 기반 협상</span></button>
+    <button class="pattern-chip p4" data-p="4"><span class="pn">P4</span><span class="pt">옵션을 펼친다</span></button>
+    <button class="pattern-chip p5" data-p="5"><span class="pn">P5</span><span class="pt">영역 경계 넘기</span></button>
+    <div class="lens-help">
+      칩을 누르면 해당 패턴의 evidence만 활성화.<br>
+      <button id="clearFilter" style="margin-top:8px">Clear Filter</button>
+    </div>
+  </aside>
+
+  <main id="top">
+
+    <section class="hero">
+      <div class="eyebrow">민정원 · 메타 패턴 포트폴리오 · v7</div>
+      <h1>프로젝트가 아니라<br><span class="em">패턴</span>으로 일합니다.</h1>
+      <p class="lead">
+        회계 시스템, 인테리어 플랫폼, 제조 ERP/FSM, 보험 운영 플랫폼.
+        4개 도메인을 거쳤지만 <strong>의사결정 방식은 11년간 같은 5개 패턴</strong>이었습니다.
+        이 포트폴리오는 그 패턴을 먼저 보여주고, 케이스 7개는 패턴의 증거로 압축했습니다.
+      </p>
+      <p class="sublead">
+        좌측 <span class="mono" style="color:var(--text-2)">Pattern Lens</span> 칩을 누르면 해당 패턴의 증거가 되는 케이스만 활성화됩니다. 어떤 패턴이 어디서 반복되는지 직접 비교해볼 수 있도록 만든 인터랙티브 뷰입니다.
+      </p>
+    </section>
+
+    <section id="patterns">
+      <h2><span class="num">§ 01</span>다섯 가지 패턴 <span style="font-family:var(--mono);font-size:13px;font-weight:400;color:var(--text-3);letter-spacing:0.05em;margin-left:6px">The Five Patterns</span></h2>
+      <p class="sec-sub">슬랙 업무 이력 184건 · 회사 4곳을 정독해 추출한 의사결정 휴리스틱.</p>
+      <div class="patterns">
+
+        <article class="pcard p1" data-p="1">
+          <div class="pcard-head"><span class="pn">P1</span><h3>비용 대비 가치부터 본다</h3></div>
+          <p class="def">기능 요청을 받으면 가장 먼저 "이 기능이 정말 필요한가, 누가 얼마나 자주 쓸 것인가"를 묻습니다. 솔루션 도입이 default가 아닙니다.</p>
+          <div class="quote">"막상 구현했는데 안쓰는 기능이면 비용써서 개발할 필요가 없을 것 같아서 좀 더 체크하도록 할게요!" <span style="color:var(--text-faint)">— 케이스 D 원문</span></div>
+          <div class="ev-label">Evidence in</div>
+          <div class="ev-chips">
+            <a class="ev-chip" href="#c01">C01 집닥 BM</a>
+            <a class="ev-chip" href="#c04">C04 ERP/CMS</a>
+            <a class="ev-chip" href="#c05">C05 ASP 종료</a>
+            <a class="ev-chip" href="#c06">C06 AI 도입</a>
+          </div>
+        </article>
+
+        <article class="pcard p2" data-p="2">
+          <div class="pcard-head"><span class="pn">P2</span><h3>개발 안 하고 풀 수 있으면 안 한다</h3></div>
+          <p class="def">문제를 받으면 먼저 "시스템 수정 없이 운영 방식 조정으로 풀 수 있는가"를 검토. 단기 임팩트보다 기술부채를 우선합니다.</p>
+          <div class="quote">"상담내용만 넣고 상태값은 대기로 해서 설계사에게 전달하면 신규 DB로 찍혀서 나가겠네용??" <span style="color:var(--text-faint)">— 케이스 G 원문 (개발 공수 0)</span></div>
+          <div class="ev-label">Evidence in</div>
+          <div class="ev-chips">
+            <a class="ev-chip" href="#c03">C03 CRM v2</a>
+            <a class="ev-chip" href="#c04">C04 ERP/CMS</a>
+            <a class="ev-chip" href="#c07">C07 조직 설계</a>
+          </div>
+        </article>
+
+        <article class="pcard p3" data-p="3">
+          <div class="pcard-head"><span class="pn">P3</span><h3>외주는 계약서·견적서·증적으로</h3></div>
+          <p class="def">외주 협상은 감정이 아니라 계약서·견적서·증적 기반. 누적된 이슈를 협상 카드로 만들어 둡니다.</p>
+          <div class="quote">"비용 오른 근거 무엇인지? 수렴할 수 없다. 프로젝트 시작 당시 인건비 기준으로 계산되어야 한다." <span style="color:var(--text-faint)">— 케이스 Q 원문 (지넥슨 노임단가 협상)</span></div>
+          <div class="ev-label">Evidence in</div>
+          <div class="ev-chips">
+            <a class="ev-chip" href="#c04">C04 ERP/CMS</a>
+            <a class="ev-chip" href="#c05">C05 ASP 종료</a>
+            <a class="ev-chip" href="#c06">C06 AI 도입</a>
+          </div>
+        </article>
+
+        <article class="pcard p4" data-p="4">
+          <div class="pcard-head"><span class="pn">P4</span><h3>결정 전에 옵션을 펼친다</h3></div>
+          <p class="def">보안·운영·비용 트레이드오프가 얽힌 의사결정은 항상 3개 이상의 옵션을 표로 정리. "조용히 하나 고르지 마"라는 본인 룰의 행동 패턴.</p>
+          <div class="quote">"Option 1: 망연계 / Option 2: RPA 내재화 / Option 3: 에이전시프로 유지" <span style="color:var(--text-faint)">— CAR 원수사 데이터 수신, 3옵션 비교</span></div>
+          <div class="ev-label">Evidence in</div>
+          <div class="ev-chips">
+            <a class="ev-chip" href="#c01">C01 집닥 BM</a>
+            <a class="ev-chip" href="#c04">C04 ERP/CMS</a>
+            <a class="ev-chip" href="#c05">C05 ASP 종료</a>
+            <a class="ev-chip" href="#c06">C06 AI 도입</a>
+          </div>
+        </article>
+
+        <article class="pcard p5" data-p="5">
+          <div class="pcard-head"><span class="pn">P5</span><h3>영역 경계 넘어 끼어든다</h3></div>
+          <p class="def">다른 팀의 영역이라도 고객 UX·시스템 흐름에 문제가 보이면 직접 개선 제안. 영역 경계 때문에 문제를 놓치지 않는 쪽이 결과적으로 비용이 적습니다.</p>
+          <div class="quote">"고객 입장에서는 이 [점검내역] 버튼이 '재신청' 기능을 포함한다는 점을 직관적으로 알기 어렵다는 현업 피드백이 있었고…" <span style="color:var(--text-faint)">— 코어 사일로 PO에 UX 개선 직접 제안</span></div>
+          <div class="ev-label">Evidence in</div>
+          <div class="ev-chips">
+            <a class="ev-chip" href="#c06">C06 AI UW PoC</a>
+            <a class="ev-chip" href="#c07">C07 조직 설계 · TPM JD</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <section id="map">
+      <h2><span class="num">§ 02</span>패턴 매트릭스 <span style="font-family:var(--mono);font-size:13px;font-weight:400;color:var(--text-3);letter-spacing:0.05em;margin-left:6px">Evidence Map</span></h2>
+      <p class="sec-sub">
+        <span class="mono" style="color:var(--text-2)">C01~C07</span>은 아래 <a href="#cases">§ 03 케이스</a>에 대응하는 케이스 번호입니다(Case 01~07).
+        세로 7개 케이스 × 가로 5개 패턴. 색 점은 그 케이스가 어떤 패턴의 증거가 되는지 표시. 오른쪽 끝 숫자는 한 케이스에서 동시에 작동한 패턴 수. <strong style="color:var(--text-2)">케이스 셀을 클릭하면</strong> 해당 케이스로 이동합니다.
+      </p>
+      <div class="matrix">
+        <div class="matrix-row head">
+          <div>케이스</div><div>P1</div><div>P2</div><div>P3</div><div>P4</div><div>P5</div><div>활성 패턴</div>
+        </div>
+        <div class="matrix-row" data-case="1">
+          <div class="case-cell"><a href="#c01" style="color:inherit;border:none;display:block"><span class="case-co">집닥 · BM</span>C01</a></div>
+          <div><span class="dot on1"></span></div><div><span class="dot"></span></div><div><span class="dot"></span></div><div><span class="dot on4"></span></div><div><span class="dot"></span></div>
+          <div class="count">2<span class="denom"> / 5</span></div>
+        </div>
+        <div class="matrix-row" data-case="2">
+          <div class="case-cell"><a href="#c02" style="color:inherit;border:none;display:block"><span class="case-co">세인 · 제조</span>C02</a></div>
+          <div><span class="dot"></span></div><div><span class="dot"></span></div><div><span class="dot"></span></div><div><span class="dot"></span></div><div><span class="dot"></span></div>
+          <div class="count">0<span class="denom"> / 5</span><span class="pre-star">*</span></div>
+        </div>
+        <div class="matrix-row" data-case="3">
+          <div class="case-cell"><a href="#c03" style="color:inherit;border:none;display:block"><span class="case-co">토스 · CRM</span>C03</a></div>
+          <div><span class="dot"></span></div><div><span class="dot on2"></span></div><div><span class="dot"></span></div><div><span class="dot"></span></div><div><span class="dot"></span></div>
+          <div class="count">1<span class="denom"> / 5</span></div>
+        </div>
+        <div class="matrix-row" data-case="4">
+          <div class="case-cell"><a href="#c04" style="color:inherit;border:none;display:block"><span class="case-co">토스 · ERP/CMS</span>C04</a></div>
+          <div><span class="dot on1"></span></div><div><span class="dot on2"></span></div><div><span class="dot on3"></span></div><div><span class="dot on4"></span></div><div><span class="dot"></span></div>
+          <div class="count">4<span class="denom"> / 5</span><span class="star">★</span></div>
+        </div>
+        <div class="matrix-row" data-case="5">
+          <div class="case-cell"><a href="#c05" style="color:inherit;border:none;display:block"><span class="case-co">토스 · ASP 종료</span>C05</a></div>
+          <div><span class="dot on1"></span></div><div><span class="dot"></span></div><div><span class="dot on3"></span></div><div><span class="dot on4"></span></div><div><span class="dot"></span></div>
+          <div class="count">3<span class="denom"> / 5</span></div>
+        </div>
+        <div class="matrix-row" data-case="6">
+          <div class="case-cell"><a href="#c06" style="color:inherit;border:none;display:block"><span class="case-co">토스 · AI 도입</span>C06</a></div>
+          <div><span class="dot on1"></span></div><div><span class="dot"></span></div><div><span class="dot on3"></span></div><div><span class="dot on4"></span></div><div><span class="dot on5"></span></div>
+          <div class="count">4<span class="denom"> / 5</span><span class="star">★</span></div>
+        </div>
+        <div class="matrix-row" data-case="7">
+          <div class="case-cell"><a href="#c07" style="color:inherit;border:none;display:block"><span class="case-co">토스 · 조직 설계</span>C07</a></div>
+          <div><span class="dot"></span></div><div><span class="dot on2"></span></div><div><span class="dot"></span></div><div><span class="dot"></span></div><div><span class="dot on5"></span></div>
+          <div class="count">2<span class="denom"> / 5</span></div>
+        </div>
+      </div>
+      <div class="legend">
+        <div class="legend-item"><span class="legend-dot p1"></span> P1 비용 대비 가치</div>
+        <div class="legend-item"><span class="legend-dot p2"></span> P2 개발 없이 풀기</div>
+        <div class="legend-item"><span class="legend-dot p3"></span> P3 증적 기반 협상</div>
+        <div class="legend-item"><span class="legend-dot p4"></span> P4 옵션 펼치기</div>
+        <div class="legend-item"><span class="legend-dot p5"></span> P5 영역 경계 넘기</div>
+      </div>
+      <p class="sec-sub" style="margin-top:14px;font-size:12.5px;line-height:1.7;">
+        <span class="mono" style="color:var(--text-2)">★ 표시</span>는 4개 이상 패턴이 동시에 작동한 케이스 — 가장 복합적인 의사결정 환경.<br>
+        <span class="mono" style="color:var(--text-2)">* 표시 (C02)</span>는 5개 패턴이 형성되기 전 시기(2021)라 점은 없지만 케이스 자체는 별도 강점(제조 현장 운영 디지털화)을 가짐.
+      </p>
+    </section>
+
+    <section id="cases">
+      <h2><span class="num">§ 03</span>케이스 — 패턴의 증거 <span style="font-family:var(--mono);font-size:13px;font-weight:400;color:var(--text-3);letter-spacing:0.05em;margin-left:6px">Cases as Evidence</span></h2>
+      <p class="sec-sub">서술이 아니라 패턴의 증거로 압축했습니다. 각 케이스 우측 상단의 색 점은 어떤 패턴이 작동했는지 표시합니다.</p>
+
+      <article class="case" id="c01" data-cs="1">
+        <div class="case-head">
+          <div>
+            <div class="case-meta">C01 · 집닥 · 2019–2020</div>
+            <h3>만성 적자 플랫폼 BM을 unit economics로 재정의</h3>
+          </div>
+          <div class="case-dots" title="패턴 P1, P4 evidence">
+            <span class="d on1"></span><span class="d"></span><span class="d"></span><span class="d on4"></span><span class="d"></span>
+          </div>
+        </div>
+        <div class="case-thesis">기능 개선이 아니라, 어디에 손대야 사업 구조가 바뀌는지를 판단했습니다.</div>
+        <div class="case-body">
+          BM 문제를 CAC·LTV·ROI·채널별 성과·파트너별 전환율로 나눠 봤고, DB 등급제·파트너 등급제로 좋은 리드가 좋은 파트너에 배정되는 구조를 설계. 단기 매출 이벤트가 아니라 BEP 운영 체계로 정렬. 이 unit economics 감각은 후일 CRM 퍼널 분석의 base가 됨.
+        </div>
+        <div class="case-metrics">
+          <div class="m"><span class="v">BEP</span><span class="l">달성 기여</span></div>
+          <div class="m"><span class="v">3년</span><span class="l">시스템 로드맵</span></div>
+        </div>
+        <div class="case-links">
+          <span class="lk-h">cross</span>
+          <a class="lk" href="#c03">→ C03 CRM 퍼널 분석 base</a>
+        </div>
+      </article>
+
+      <article class="case" id="c02" data-cs="2">
+        <div class="case-head">
+          <div>
+            <div class="case-meta">C02 · 세인홈시스 · 2021–2022</div>
+            <h3>제조 현장 ERP/CRM/FSM을 하나의 운영 시스템으로</h3>
+          </div>
+          <div class="case-dots" title="패턴 형성 이전 — 별도 강점">
+            <span class="d"></span><span class="d"></span><span class="d"></span><span class="d"></span><span class="d"></span>
+          </div>
+        </div>
+        <div class="case-thesis">대리점·기사·본사·CS가 같은 데이터·프로세스로 움직이게 만드는 것이 운영 제품 PM의 일.</div>
+        <div class="case-body">
+          ERP/CRM/FSM을 각각 기능이 아니라 고객 접수→기사 배정→방문→설치/수리→완료→재고 수불의 하나의 운영 퍼널로 정의. QR/GPS/알림톡/모바일 서명으로 현장 데이터가 자연스럽게 쌓이는 장치 설계. 토스에서 설계사 앱·ERP·CRM 설계 base가 됨.
+        </div>
+        <div class="case-metrics">
+          <div class="m"><span class="v">30+</span><span class="l">TF 인원</span></div>
+          <div class="m"><span class="v">−30%</span><span class="l">CS 민원</span></div>
+          <div class="m"><span class="v">전국</span><span class="l">수불 가시화</span></div>
+        </div>
+        <div class="case-links">
+          <span class="lk-h">cross</span>
+          <a class="lk" href="#c03">→ C03 설계사 현장 UX</a>
+          <a class="lk" href="#c04">→ C04 ERP 운영 base</a>
+        </div>
+      </article>
+
+      <article class="case" id="c03" data-cs="3">
+        <div class="case-head">
+          <div>
+            <div class="case-meta">C03 · 토스인슈어런스 · 2023–</div>
+            <h3>CRM v2 — 사용률 하락을 비즈니스 인프라 문제로 재정의</h3>
+          </div>
+          <div class="case-dots" title="P2 evidence">
+            <span class="d"></span><span class="d on2"></span><span class="d"></span><span class="d"></span><span class="d"></span>
+          </div>
+        </div>
+        <div class="case-thesis">요청받은 화면을 고치는 사람이 아니라, 그 뒤에 있는 사업 리스크를 발견하는 것이 PO의 일.</div>
+        <div class="case-body">
+          사용률 95%→64.5% 하락을 단순 UX 문제가 아니라 고객 정보 유출·상담 퍼널 분석 마비·DB 활용 로드맵 붕괴로 정의. 일부 운영 이슈는 시스템 수정 없이 운영방식 조정만으로 해결(P2 — 신규 DB 표기 누락은 CRM 로직 분석 후 운영팀 업무 방식 변경 제안으로 개발 공수 0 해결). 180만 상담·17만 계약·19개월 데이터로 "상담 물량 = 계약 성장" 전제 검증.
+        </div>
+        <div class="case-metrics">
+          <div class="m"><span class="v">95→64.5%</span><span class="l">사용률 하락</span></div>
+          <div class="m"><span class="v">180만/17만</span><span class="l">상담/계약 분석</span></div>
+          <div class="m"><span class="v">3개월</span><span class="l">30+ TF 릴리즈</span></div>
+        </div>
+        <div class="case-links">
+          <span class="lk-h">cross</span>
+          <a class="lk" href="#c01">→ C01 퍼널 분석 frame</a>
+          <a class="lk" href="#c04">→ C04 ERP 인프라 의존</a>
+        </div>
+      </article>
+
+      <article class="case" id="c04" data-cs="4">
+        <div class="case-head">
+          <div>
+            <div class="case-meta">C04 · 토스인슈어런스 · 2022–</div>
+            <h3>ERP/CMS — 전사 운영 시스템을 실행 체계로 구축</h3>
+          </div>
+          <div class="case-dots" title="P1, P2, P3, P4 evidence — 가장 복합적">
+            <span class="d on1"></span><span class="d on2"></span><span class="d on3"></span><span class="d on4"></span><span class="d"></span>
+          </div>
+        </div>
+        <div class="case-thesis">불명확한 대형 프로젝트에서 목적·범위·외주 협업 방식·오픈 이후 운영 기준을 먼저 만드는 일이 핵심.</div>
+        <div class="case-body">
+          1차 범위를 <code>MYGA 대체 + 기존 운영 유지 + 보안 리스크 해소</code>로 자름. 60명 TF가 같은 기준으로 움직이도록 RFP·SRS·주간보고·외주 협업 프로토콜·장애 대응 체계. CMS는 정산을 회계 무결성·내부 통제 문제로 보고 ERP-CMS-SAP 데이터 싱크·IFRS 자동 산출·2022년 기말잔액 마이그레이션 검증 기준까지 연결.
+        </div>
+        <div class="case-metrics">
+          <div class="m"><span class="v">3,500</span><span class="l">사용자</span></div>
+          <div class="m"><span class="v">60만건</span><span class="l">계약 데이터</span></div>
+          <div class="m"><span class="v">월100억+</span><span class="l">CMS 정산</span></div>
+          <div class="m"><span class="v">60명</span><span class="l">TF</span></div>
+        </div>
+        <div class="case-links">
+          <span class="lk-h">cross</span>
+          <a class="lk" href="#c02">→ C02 운영 인프라 frame</a>
+          <a class="lk" href="#c05">→ C05 외주 협상 누적</a>
+        </div>
+      </article>
+
+      <article class="case" id="c05" data-cs="5">
+        <div class="case-head">
+          <div>
+            <div class="case-meta">C05 · 토스인슈어런스 · 2024–2026</div>
+            <h3>ASP 종료와 내재화 — 외주 의존을 장기 제품 전략으로</h3>
+          </div>
+          <div class="case-dots" title="P1, P3, P4 evidence">
+            <span class="d on1"></span><span class="d"></span><span class="d on3"></span><span class="d on4"></span><span class="d"></span>
+          </div>
+        </div>
+        <div class="case-thesis">기술부채·외주 의존·운영 공백·법무 리스크·내부 역량 전환을 하나의 제품 전략으로 다뤘습니다.</div>
+        <div class="case-body">
+          감정적 외주 불만 X, 증적 기반 의사결정(P3). 5년간 7가지 구조적 문제를 사례로 축적 → 종료·협상 근거. 소스코드 1.2억 매입을 통제권 확보로 봄(P1·P4 — 일괄 vs 외주 연장 vs 단계적, 3옵션 비교 후 단계 선택). 명세서 CRM → CMS 수수료 → ERP 완전 내재화로 단계화. 2026년부터 내부 개발 채널 기반 이슈 접수 체계 재설계.
+        </div>
+        <div class="case-metrics">
+          <div class="m"><span class="v">1.2억</span><span class="l">소스코드 매입</span></div>
+          <div class="m"><span class="v">2026</span><span class="l">ASP 종료</span></div>
+          <div class="m"><span class="v">7가지</span><span class="l">증적 누적</span></div>
+        </div>
+        <div class="case-links">
+          <span class="lk-h">cross</span>
+          <a class="lk" href="#c04">→ C04 외주 협업체계 base</a>
+        </div>
+      </article>
+
+      <article class="case" id="c06" data-cs="6">
+        <div class="case-head">
+          <div>
+            <div class="case-meta">C06 · 토스인슈어런스 · 2024–</div>
+            <h3>AI 도입 — 기능이 아니라 업무 시스템으로 설계</h3>
+          </div>
+          <div class="case-dots" title="P1, P3, P4, P5 evidence — 가장 복합적">
+            <span class="d on1"></span><span class="d"></span><span class="d on3"></span><span class="d on4"></span><span class="d on5"></span>
+          </div>
+        </div>
+        <div class="case-thesis">AI는 기능보다 운영 모델이 먼저. 데이터·권한·실패 케이스·품질 게이트가 1차 설계 대상.</div>
+        <div class="case-body">
+          인켑 벤더와 영문 직접 협상(P3). 솔루션 비교 후 도입(P1·P4 — 벤더 탐색·비용/보안 검토). AI 코드리뷰 + 이의 제기 프로세스로 조직이 AI 결과 검증하는 방식 설계. 외부 설계사용 AI UW PoC에서 올거나이즈 방향·학습 데이터·보험사별 데이터셋·관리자 콘솔·감사 로그·도메인 스키마까지 — 영역 경계 넘어(P5) 외부 서비스 수준의 운영 모델 직접 기획.
+        </div>
+        <div class="case-metrics">
+          <div class="m"><span class="v">PoC→운영</span><span class="l">사내 첫 AI 챗봇</span></div>
+          <div class="m"><span class="v">웹+슬랙</span><span class="l">멀티 채널 확장</span></div>
+        </div>
+        <div class="case-links">
+          <span class="lk-h">cross</span>
+          <a class="lk" href="#c05">→ C05 벤더 협상 방식</a>
+          <a class="lk" href="#c07">→ C07 조직 품질 게이트</a>
+        </div>
+      </article>
+
+      <article class="case" id="c07" data-cs="7">
+        <div class="case-head">
+          <div>
+            <div class="case-meta">C07 · 토스인슈어런스 · 2024–</div>
+            <h3>조직/거버넌스 — 팀이 무너지지 않는 구조를 설계</h3>
+          </div>
+          <div class="case-dots" title="P2, P5 evidence">
+            <span class="d"></span><span class="d on2"></span><span class="d"></span><span class="d"></span><span class="d on5"></span>
+          </div>
+        </div>
+        <div class="case-thesis">PO/PM은 기능을 관리하는 사람만이 아니라, 팀이 더 나은 의사결정을 하도록 구조를 만드는 사람.</div>
+        <div class="case-body">
+          문제를 "사람이 부족"이 아니라 "역할이 합쳐져 있다"로 정의 — 추가 개발 아닌 구조 변경(P2). PM은 무엇을, TPM은 어떻게 — TPM 채용 JD 직접 작성. 보안 공수 60~70% 잠식 상황에서 PM이 중간 우선순위 잡는 메이커 보호 협업 구조 제안·합의. 본인 영역 경계(PM 역할 정의)를 넘어 조직 설계까지 끼어듦(P5).
+        </div>
+        <div class="case-metrics">
+          <div class="m"><span class="v">PM/TPM</span><span class="l">역할 분리</span></div>
+          <div class="m"><span class="v">60~70%</span><span class="l">보안 공수 잠식 → 보호</span></div>
+        </div>
+        <div class="case-links">
+          <span class="lk-h">cross</span>
+          <a class="lk" href="#c06">→ C06 AI 품질 게이트</a>
+        </div>
+      </article>
+    </section>
+
+    <section id="arc">
+      <h2><span class="num">§ 04</span>커리어 흐름 <span style="font-family:var(--mono);font-size:13px;font-weight:400;color:var(--text-3);letter-spacing:0.05em;margin-left:6px">Career Arc</span></h2>
+      <p class="sec-sub">도메인은 바뀌었지만 일하는 방식은 같았습니다.</p>
+      <div class="arc">
+        <div class="arc-item">
+          <div class="arc-co"><b>더존 키컴</b>2017–2018<br>회계 시스템</div>
+          <p>회계·웹팩스 사업기획. 손익 시뮬레이션·고객 전수 조사·VIP 솔루션. 이후 ERP/CMS/SAP/IFRS 회계 무결성을 다루는 base.</p>
+        </div>
+        <div class="arc-item">
+          <div class="arc-co"><b>집닥</b>2019–2020<br>인테리어 플랫폼 · 매니저</div>
+          <p>CAC·LTV·ROI 기반 BM 재설계. DB·파트너 등급제. 이후 보험 CRM 퍼널 분석의 base.</p>
+        </div>
+        <div class="arc-item">
+          <div class="arc-co"><b>세인홈시스</b>2021–2022<br>가전 제조</div>
+          <p>제조 ERP/CRM/FSM 30+ TF. QR/GPS 현장 디지털화. CS 민원 30% 감소. 이후 설계사 앱·ERP 운영의 base.</p>
+        </div>
+        <div class="arc-item">
+          <div class="arc-co"><b>토스인슈어런스</b>2022–현재<br>보험 · TPM &amp; Team Leader</div>
+          <p>위 3개 축이 결합. 보험 ERP/CMS/CRM/앱/AI/외주 ASP 종료 전체 사이클. 위 5개 패턴이 본격적으로 함께 작동.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="fit">
+      <h2><span class="num">§ 05</span>잘 맞는 역할 <span style="font-family:var(--mono);font-size:13px;font-weight:400;color:var(--text-3);letter-spacing:0.05em;margin-left:6px">Best Fit</span></h2>
+      <p class="sec-sub">위 5개 패턴이 동시에 작동해야 하는 환경에서 가장 효과적입니다.</p>
+      <div class="fit">
+        <div class="fit-item"><div class="fi-n">①</div><div><h3>복잡한 B2B/B2B2C 운영 제품의 PO/PM</h3><p>여러 사용자군·권한·정책·데이터 정합성·운영 프로세스가 얽힌 제품. 본사·대리점·기사·CS 또는 설계사·운영·회계·보안처럼 같은 시스템을 다르게 쓰는 환경.</p></div></div>
+        <div class="fit-item"><div class="fi-n">②</div><div><h3>플랫폼·시스템 TPM/PM</h3><p>ERP·CRM·CMS·SAP·모바일 앱처럼 여러 시스템이 연결되는 환경. 개발 책임자가 아니라 기술 제약을 제품 판단·일정·리스크 언어로 번역.</p></div></div>
+        <div class="fit-item"><div class="fi-n">③</div><div><h3>사업 모델 + 운영 시스템을 함께 보는 PO/PM</h3><p>집닥 unit economics → 세인 현장 운영 → 토스 보험 플랫폼. 기능 출시만 보는 역할보다 사업 구조와 운영 구조를 같이 바꿔야 하는 역할.</p></div></div>
+        <div class="fit-item"><div class="fi-n">④</div><div><h3>외주·레거시 내재화 PM</h3><p>ASP/SI 종료·이관, 단계적 내재화 로드맵, 협상 카드 누적, 운영 공백 방지. P3·P4가 동시에 작동하는 환경.</p></div></div>
+        <div class="fit-item"><div class="fi-n">⑤</div><div><h3>AI를 업무 시스템으로 넣는 PM</h3><p>AI 기능이 아니라 데이터·권한·실패 모드·품질 게이트·이의제기 프로세스 설계. C06이 그 모델.</p></div></div>
+      </div>
+    </section>
+
+    <section id="summary">
+      <h2><span class="num">§ 06</span>한 줄 요약 <span style="font-family:var(--mono);font-size:13px;font-weight:400;color:var(--text-3);letter-spacing:0.05em;margin-left:6px">One-liner</span></h2>
+      <div class="summary">
+        <p class="punch">"무엇을 만들었는가"보다 "어떤 패턴으로 일했는가"가 더 정확하게 저를 설명합니다.</p>
+        <p>도메인은 회계 → 인테리어 → 제조 → 보험으로 옮겼지만, 비용 대비 가치부터 보는 습관, 개발 안 하고 푸는 우선순위, 계약서·증적 기반 외주 협상, 결정 전 옵션 펼치기, 영역 경계 넘기 — 이 5개 패턴은 11년간 같았습니다. 그래서 다음 도메인에서도 같은 방식으로 작동합니다.</p>
+        <div class="cta">
+          <a class="primary" href="mailto:min_jungwon@naver.com">min_jungwon@naver.com</a>
+          <a href="./resume/">Resume →</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>v7 · meta-pattern lens · pretendard + jetbrains mono · ©2026</footer>
+  </main>
+</div>
+
+<script>
+const html = document.documentElement;
+const btn = document.getElementById('themeBtn');
+
+function setTheme(mode) {
+  if (mode === 'system') html.removeAttribute('data-theme');
+  else html.setAttribute('data-theme', mode);
+  localStorage.setItem('theme', mode);
+  btn.textContent = mode === 'system' ? 'Auto' : (mode === 'dark' ? 'Dark' : 'Light');
+}
+const saved = localStorage.getItem('theme') || 'dark';
+setTheme(saved);
+btn.addEventListener('click', () => {
+  const cur = localStorage.getItem('theme') || 'dark';
+  const next = cur === 'dark' ? 'light' : cur === 'light' ? 'system' : 'dark';
+  setTheme(next);
+});
+
+// Pattern Lens — filtering
+const chips = document.querySelectorAll('.pattern-chip');
+const allCases = document.querySelectorAll('.case');
+const allPcards = document.querySelectorAll('.pcard');
+const allMatrixRows = document.querySelectorAll('.matrix-row[data-case]');
+const layout = document.querySelector('.layout');
+const clearBtn = document.getElementById('clearFilter');
+
+// Each case's evidence patterns (must match case-dots above)
+const caseToPatterns = {
+  1: ['1','4'],
+  2: [],
+  3: ['2'],
+  4: ['1','2','3','4'],
+  5: ['1','3','4'],
+  6: ['1','3','4','5'],
+  7: ['2','5']
+};
+// Each pattern's pcard
+const pcardToPattern = {};
+allPcards.forEach(p => pcardToPattern[p.dataset.p] = p);
+
+let activePatterns = new Set();
+
+function applyFilter() {
+  if (activePatterns.size === 0) {
+    document.body.classList.remove('filtering');
+    chips.forEach(c => c.classList.remove('active'));
+    allCases.forEach(c => c.classList.remove('is-active'));
+    allPcards.forEach(p => p.classList.remove('is-active'));
+    return;
+  }
+  document.body.classList.add('filtering');
+  chips.forEach(c => c.classList.toggle('active', activePatterns.has(c.dataset.p)));
+  allPcards.forEach(p => p.classList.toggle('is-active', activePatterns.has(p.dataset.p)));
+  allCases.forEach(c => {
+    const cs = c.dataset.cs;
+    const patterns = caseToPatterns[cs] || [];
+    const has = patterns.some(p => activePatterns.has(p));
+    c.classList.toggle('is-active', has);
+  });
+}
+
+chips.forEach(chip => {
+  chip.addEventListener('click', () => {
+    const p = chip.dataset.p;
+    if (activePatterns.has(p)) activePatterns.delete(p);
+    else activePatterns.add(p);
+    applyFilter();
+  });
+});
+clearBtn.addEventListener('click', () => {
+  activePatterns.clear();
+  applyFilter();
+});
+</script>
+</body>
+</html>
