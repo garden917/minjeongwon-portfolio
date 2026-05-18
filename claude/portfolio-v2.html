@@ -770,7 +770,7 @@ footer {
       <h1>프로젝트가 아니라<br><span class="em">패턴</span>으로 일합니다.</h1>
       <p class="lead">
         회계 시스템, 인테리어 플랫폼, 제조 ERP/FSM, 보험 운영 플랫폼.
-        4개 도메인을 거쳤지만 <strong>의사결정 방식은 11년간 같은 5개 패턴</strong>이었습니다.
+        4개 도메인을 거쳤지만 <strong>의사결정 방식은 여러 도메인을 거치며 일관된 5개 패턴</strong>이었습니다.
         이 포트폴리오는 그 패턴을 먼저 보여주고, 케이스 7개는 패턴의 증거로 압축했습니다.
       </p>
       <p class="sublead">
@@ -1053,11 +1053,12 @@ footer {
         </div>
         <div class="case-thesis">AI는 기능보다 운영 모델이 먼저. 데이터·권한·실패 케이스·품질 게이트가 1차 설계 대상.</div>
         <div class="case-body">
-          인켑 벤더와 영문 직접 협상(P3). 솔루션 비교 후 도입(P1·P4 — 벤더 탐색·비용/보안 검토). AI 코드리뷰 + 이의 제기 프로세스로 조직이 AI 결과 검증하는 방식 설계. 외부 설계사용 AI UW PoC에서 올거나이즈 방향·학습 데이터·보험사별 데이터셋·관리자 콘솔·감사 로그·도메인 스키마까지 — 영역 경계 넘어(P5) 외부 서비스 수준의 운영 모델 직접 기획.
+          두 개의 별개 AI 프로젝트를 PM이 단독 운영. <b>① 인켑(Inkeep) 사내 AI 챗봇 (2024.08–2025.11)</b> — IT Manager 전산 문의 자동화 목적의 Slack 기반 도입(2024.08–10, 벤더 영문 직접 협상 P3, 비용/보안 검토 P1·P4), 인슈헬프봇 오픈 시 응답 가능 범위·출처 문서·담당자 정보 출력 기준 정리(2025.01), 이후 수수료팀·계약팀 응대 영역으로 확장 가능성 검토, 웹 버전 확장·관리자 권한·구 계정 정리로 운영 위생 관리(2025.11). <b>② AI UW 설계사 센터 프로젝트 — 3단계 로드맵 중 1단계 PoC 5개월 전체 주도(2025.11–2026.04)</b> — 사내 교육팀 월 수백 건 UW 문의 자동화 목적. 국내 6개사 비딩 → 3개사 솔루션 평가 → 올거나이즈 선정(P4), 하이브리드 Agent(RDB + 벡터DB) 데이터 구조 직접 설계, 보안 검수(PoC는 AWS US 리전 / 본계약은 서울 싱글 테넌트·KMS·DLP 선결 조건), PoC 비용 구조(용역비 vs 사용료) 분석(P1), 5개월 컨텍스트 모아보기 스레드 집약(P3·P5)까지 PM이 전 사이클을 직접 운영.
         </div>
         <div class="case-metrics">
           <div class="m"><span class="v">PoC→운영</span><span class="l">사내 첫 AI 챗봇</span></div>
-          <div class="m"><span class="v">웹+슬랙</span><span class="l">멀티 채널 확장</span></div>
+          <div class="m"><span class="v">5개월</span><span class="l">AI UW 설계사 센터 전체 주도</span></div>
+          <div class="m"><span class="v">6→3→1</span><span class="l">솔루션 비딩·평가·선정</span></div>
         </div>
         <div class="case-links">
           <span class="lk-h">cross</span>
@@ -1108,10 +1109,6 @@ footer {
           <p>제조 ERP/CRM/FSM 30+ TF. QR/GPS 현장 디지털화. CS 민원 30% 감소. 외주 선정 17개 평가항목·SRS·1년 유지보수 계약까지 발주자 측에서 직접. 이후 설계사 앱·ERP 운영·ASP 종료의 base.</p>
         </div>
         <div class="arc-item">
-          <div class="arc-co"><b>내모마켓 / MOYOVA</b>2022.02–2022.04<br>모바일 마켓플레이스 · 기획셀 셀장</div>
-          <p>단기 1–3개월. 셀러 마켓플레이스 어드민 와이어프레임 + 에코태그(분리배출 IoT) 7단계 product roadmap 설계. 단기간에 새 도메인에 들어가 사업 가설과 시스템 로드맵을 정렬하는 패턴 evidence.</p>
-        </div>
-        <div class="arc-item">
           <div class="arc-co"><b>토스인슈어런스</b>2022.05–현재<br>보험 · Product Platform Team / TPM</div>
           <p>위 축이 결합. 보험 ERP/CMS/CRM/앱/AI/외주 ASP 종료 전체 사이클. 위 5개 패턴이 본격적으로 함께 작동.</p>
         </div>
@@ -1126,7 +1123,7 @@ footer {
         <div class="fit-item"><div class="fi-n">②</div><div><h3>플랫폼·시스템 TPM/PM</h3><p>ERP·CRM·CMS·SAP·모바일 앱처럼 여러 시스템이 연결되는 환경. 개발 책임자가 아니라 기술 제약을 제품 판단·일정·리스크 언어로 번역.</p></div></div>
         <div class="fit-item"><div class="fi-n">③</div><div><h3>사업 모델 + 운영 시스템을 함께 보는 PO/PM</h3><p>집닥 unit economics → 세인 현장 운영 → 토스 보험 플랫폼. 기능 출시만 보는 역할보다 사업 구조와 운영 구조를 같이 바꿔야 하는 역할.</p></div></div>
         <div class="fit-item"><div class="fi-n">④</div><div><h3>외주·레거시 내재화 PM</h3><p>ASP/SI 종료·이관, 단계적 내재화 로드맵, 협상 카드 누적, 운영 공백 방지. P3·P4가 동시에 작동하는 환경.</p></div></div>
-        <div class="fit-item"><div class="fi-n">⑤</div><div><h3>AI를 업무 시스템으로 넣는 PM</h3><p>AI 기능이 아니라 데이터·권한·실패 모드·품질 게이트·이의제기 프로세스 설계. C06이 그 모델.</p></div></div>
+        <div class="fit-item"><div class="fi-n">⑤</div><div><h3>AI를 업무 시스템으로 넣는 PM</h3><p>AI 기능이 아니라 벤더 협상·데이터 구조·보안 검수·비용 구조·운영 위생까지 PM이 직접 챙기는 영역. C06이 그 모델 (인켑 + AI UW 설계사 센터).</p></div></div>
       </div>
     </section>
 
@@ -1134,7 +1131,7 @@ footer {
       <h2><span class="num">§ 06</span>한 줄 요약 <span style="font-family:var(--mono);font-size:13px;font-weight:400;color:var(--text-3);letter-spacing:0.05em;margin-left:6px">One-liner</span></h2>
       <div class="summary">
         <p class="punch">"무엇을 만들었는가"보다 "어떤 패턴으로 일했는가"가 더 정확하게 저를 설명합니다.</p>
-        <p>도메인은 회계 → 인테리어 → 제조 → 모바일 마켓플레이스 → 보험으로 옮겼지만, 비용 대비 가치부터 보는 습관, 개발 안 하고 푸는 우선순위, 계약서·증적 기반 외주 협상, 결정 전 옵션 펼치기, 영역 경계 넘기 — 이 5개 패턴은 11년간 같았습니다. 태니지먼트 강점 진단(평가+추진 강점 / 단순화·논리·효율·문제발견·달성·주도 6가지 재능)도 같은 패턴을 확인합니다. 그래서 다음 도메인에서도 같은 방식으로 작동합니다.</p>
+        <p>도메인은 회계 → 인테리어 → 제조 → 모바일 마켓플레이스 → 보험으로 옮겼지만, 비용 대비 가치부터 보는 습관, 개발 안 하고 푸는 우선순위, 계약서·증적 기반 외주 협상, 결정 전 옵션 펼치기, 영역 경계 넘기 — 이 5개 패턴은 여러 도메인에서 일관되게 작동했습니다. 태니지먼트 강점 진단(평가+추진 강점 / 단순화·논리·효율·문제발견·달성·주도 6가지 재능)도 같은 패턴을 확인합니다. 그래서 다음 도메인에서도 같은 방식으로 작동합니다.</p>
         <div class="cta">
           <a class="primary" href="mailto:min_jungwon@naver.com">min_jungwon@naver.com</a>
           <a href="./resume/index-v2.html">Resume v2 →</a>
